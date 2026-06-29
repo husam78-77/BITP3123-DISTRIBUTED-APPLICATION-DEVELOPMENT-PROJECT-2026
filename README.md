@@ -409,7 +409,6 @@ Connect at `http://localhost:<port>/h2-console` with:
 - **Password:** *(leave blank)*
 
 ---
-
 ## License
 
 No license has been specified for this repository. All rights are reserved by the project authors. This codebase is intended solely for academic submission and evaluation under BITP3123 at the respective institution.
