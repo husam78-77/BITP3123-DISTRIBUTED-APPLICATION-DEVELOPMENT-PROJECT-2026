@@ -4,6 +4,15 @@ echo.
 
 set BASE=%~dp0smartcampus-connect
 
+echo Cleaning up existing ports (8081-8085, 9999) to prevent conflicts...
+for %%p in (8081 8082 8083 8084 8085 9999) do (
+    for /f "tokens=5" %%a in ('netstat -aon ^| findstr "LISTENING" ^| findstr ":%%p"') do (
+        if "%%a" neq "0" taskkill /F /PID %%a >nul 2>&1
+    )
+)
+echo Ports cleaned successfully.
+echo.
+
 rem Limit each JVM to 256MB heap so 5 services fit in RAM comfortably
 set MAVEN_OPTS=-Xms64m -Xmx256m
 
