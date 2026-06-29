@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add NotificationProducerClient TCP producer for Library Booking - Ahmed B032320114"
-package com.smartcampus.librarybooking.socket;
+﻿package com.smartcampus.librarybooking.socket;
 
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
@@ -12,19 +10,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R6 — DISTRIBUTED MESSAGING: TCP Socket Producer (Library Booking)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R6 â€” DISTRIBUTED MESSAGING: TCP Socket Producer (Library Booking)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
- * This class implements the <b>Producer</b> side of the Producer–Consumer
+ * This class implements the <b>Producer</b> side of the Producerâ€“Consumer
  * architecture for the Library Booking Service.
  *
  * <h3>Architecture Role</h3>
  * <pre>
- *   ┌───────────────────────┐          TCP (port 9999)          ┌─────────────────────────┐
- *   │  Library Booking      │ ──────────────────────────────────>│   Notification Service  │
- *   │  Service (PRODUCER)   │         LIBRARY messages          │   (CONSUMER)            │
- *   └───────────────────────┘                                   └─────────────────────────┘
+ *   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ          TCP (port 9999)          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ
+ *   â”‚  Library Booking      â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚   Notification Service  â”‚
+ *   â”‚  Service (PRODUCER)   â”‚         LIBRARY messages          â”‚   (CONSUMER)            â”‚
+ *   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک                                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک
  * </pre>
  *
  * <h3>Events Produced</h3>
@@ -37,18 +35,18 @@ import java.util.concurrent.CompletableFuture;
  * <p>The {@link #sendAsync(String, String)} method uses
  * {@link CompletableFuture#runAsync(Runnable)} to dispatch the TCP send
  * to a background thread.  This ensures that {@code borrowBook()} and
- * {@code bookRoom()} return immediately — notification delivery does not
+ * {@code bookRoom()} return immediately â€” notification delivery does not
  * block the HTTP response.</p>
  *
  * <h3>Connection Management</h3>
  * <ul>
- *   <li>Lazy initialization — connection opens on first send.</li>
- *   <li>Persistent — one connection is reused across sends.</li>
- *   <li>Auto-reconnect — if the connection drops, the next send
+ *   <li>Lazy initialization â€” connection opens on first send.</li>
+ *   <li>Persistent â€” one connection is reused across sends.</li>
+ *   <li>Auto-reconnect â€” if the connection drops, the next send
  *       re-establishes it.</li>
  *   <li>Graceful shutdown via {@code @PreDestroy}.</li>
  * </ul>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Component
 public class NotificationProducerClient {
@@ -84,11 +82,11 @@ public class NotificationProducerClient {
     }
 
     /**
-     * R6 — ASYNCHRONOUS MESSAGE SEND.
+     * R6 â€” ASYNCHRONOUS MESSAGE SEND.
      *
      * <p>Sends a notification message to the consumer asynchronously.
      * The calling method (e.g., {@code borrowBook}, {@code bookRoom})
-     * returns immediately — message delivery happens on a background
+     * returns immediately â€” message delivery happens on a background
      * thread via {@link CompletableFuture}.</p>
      *
      * @param type    the message type (e.g., "LIBRARY")
@@ -130,7 +128,7 @@ public class NotificationProducerClient {
     }
 
     /**
-     * R6 — Graceful shutdown: closes the TCP connection when the
+     * R6 â€” Graceful shutdown: closes the TCP connection when the
      * Spring application context is destroyed.
      */
     @PreDestroy

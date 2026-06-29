@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SmartCampus Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <h1>SmartCampus Connect</h1>
+        <nav class="main-nav">
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="courses.html">Courses</a>
+            <a href="library.html">Library</a>
+            <a href="notifications.html">Notifications</a>
+            <a href="reports.html">Reports</a>
+            <a href="soap.html">SOAP Demo</a>
+        </nav>
+    </header>
+
+    <div id="toast-container"></div>
+
+    <main class="container">
+        <div class="grid">
+            <a href="students.html" class="card-link">
+                <div class="card">
+                    <h2>Student Service</h2>
+                    <p>Manage student profiles, view matriculation numbers, and update student records.</p>
+                </div>
+            </a>
+            <a href="courses.html" class="card-link">
+                <div class="card">
+                    <h2>Course Service</h2>
+                    <p>Create courses, manage enrolments, and drop students from classes.</p>
+                </div>
+            </a>
+            <a href="library.html" class="card-link">
+                <div class="card">
+                    <h2>Library Service</h2>
+                    <p>Manage physical books, borrow/return functionality, and book study rooms.</p>
+                </div>
+            </a>
+            <a href="notifications.html" class="card-link">
+                <div class="card">
+                    <h2>Notification Service</h2>
+                    <p>View TCP system alerts and messages pushed from other microservices.</p>
+                </div>
+            </a>
+            <a href="reports.html" class="card-link">
+                <div class="card">
+                    <h2>Reporting Service</h2>
+                    <p>Generate comprehensive campus analytics, enrolment stats, and library usage.</p>
+                </div>
+            </a>
+            <a href="soap.html" class="card-link">
+                <div class="card">
+                    <h2>SOAP Demo</h2>
+                    <p>Test the dedicated SOAP XML endpoint for library book availability.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script src="js/common.js"></script>
+</body>
+
+</html>

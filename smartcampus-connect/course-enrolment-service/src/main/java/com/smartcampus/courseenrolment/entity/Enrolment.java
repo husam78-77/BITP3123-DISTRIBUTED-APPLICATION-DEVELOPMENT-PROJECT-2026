@@ -1,6 +1,4 @@
-// First Commit - Abdalla Hashim Ahmed Abdalla - B032320119
-// git commit -m "Add Enrolment entity - Abdalla B032320119"
-package com.smartcampus.courseenrolment.entity;
+﻿package com.smartcampus.courseenrolment.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

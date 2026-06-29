@@ -1,5 +1,4 @@
-// R5 - Multithreaded Server: Load Test Utility
-// git commit -m "Add RoomBookingLoadTest for R5 concurrency demo - Husam B032320128"
+﻿// R5 - Multithreaded Server: Load Test Utility
 package com.smartcampus.librarybooking.service;
 
 import com.smartcampus.librarybooking.entity.RoomBooking;
@@ -12,9 +11,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R5 — LOAD TEST UTILITY (Concurrency Demonstration)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R5 â€” LOAD TEST UTILITY (Concurrency Demonstration)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
  * This utility class verifies the R5 Multithreaded Server implementation by
  * simulating 20 concurrent booking requests for the <b>SAME room and time
@@ -22,13 +21,13 @@ import java.util.concurrent.Future;
  *
  * <h3>What It Proves</h3>
  * <ol>
- *   <li><b>Thread Pool</b> — All 20 requests are submitted to the
+ *   <li><b>Thread Pool</b> â€” All 20 requests are submitted to the
  *       {@link ExecutorService} (fixed pool of 10 threads), proving that
  *       the server uses a managed thread pool for concurrent processing.</li>
- *   <li><b>Shared Mutable State</b> — All 20 threads attempt to modify the
+ *   <li><b>Shared Mutable State</b> â€” All 20 threads attempt to modify the
  *       same shared resource (the {@code room_bookings} table for a single
  *       room), creating a high-contention scenario.</li>
- *   <li><b>Concurrency Protection</b> — The per-room {@code ReentrantLock}
+ *   <li><b>Concurrency Protection</b> â€” The per-room {@code ReentrantLock}
  *       in {@code LibraryService.bookRoom()} ensures that exactly
  *       <b>ONE</b> of the 20 requests succeeds.  The other 19 are rejected
  *       with a conflict error, proving that the lock prevents double-bookings
@@ -38,12 +37,12 @@ import java.util.concurrent.Future;
  * <h3>Expected Output</h3>
  * <pre>
  *   Exactly  1 line : "SUCCESS: Student X booked room LIB-ROOM-A1"
- *   Exactly 19 lines: "REJECTED: Student Y — conflict detected"
+ *   Exactly 19 lines: "REJECTED: Student Y â€” conflict detected"
  *   Summary         : "1 succeeded, 19 rejected (out of 20 total)"
  * </pre>
  *
  * <h3>How to Run</h3>
- * <p>This is <b>NOT</b> a {@code CommandLineRunner} — it does not execute
+ * <p>This is <b>NOT</b> a {@code CommandLineRunner} â€” it does not execute
  * automatically at application startup.  Instead, call
  * {@link #execute(LibraryService)} from:</p>
  * <ul>
@@ -51,7 +50,7 @@ import java.util.concurrent.Future;
  *   <li>A REST endpoint for manual trigger</li>
  *   <li>A {@code main()} method for standalone execution</li>
  * </ul>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 public class RoomBookingLoadTest {
 
@@ -61,11 +60,11 @@ public class RoomBookingLoadTest {
     /** The room all students will attempt to book simultaneously. */
     private static final String TARGET_ROOM = "LIB-ROOM-A1";
 
-    /** Booking time slot — all requests target the same window. */
+    /** Booking time slot â€” all requests target the same window. */
     private static final LocalDateTime START_TIME = LocalDateTime.of(2026, 6, 15, 10, 0);
     private static final LocalDateTime END_TIME   = LocalDateTime.of(2026, 6, 15, 12, 0);
 
-    // Private constructor — utility class, not instantiated
+    // Private constructor â€” utility class, not instantiated
     private RoomBookingLoadTest() {}
 
     /**
@@ -106,9 +105,9 @@ public class RoomBookingLoadTest {
         System.out.println("  INDIVIDUAL RESULTS");
         System.out.println("---------------------------------------------------------------------");
 
-        // ── R5 — THREAD POOL USAGE ──────────────────────────────────────
+        // â”€â”€ R5 â€” THREAD POOL USAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // Obtain the same ExecutorService bean used by the production code.
-        // All 20 tasks are submitted to this pool, which has 10 threads —
+        // All 20 tasks are submitted to this pool, which has 10 threads â€”
         // so up to 10 booking attempts run truly in parallel.
         ExecutorService executor = libraryService.getExecutorService();
         List<Future<RoomBooking>> futures = new ArrayList<>();
@@ -116,7 +115,7 @@ public class RoomBookingLoadTest {
         // Record start time for throughput calculation
         long startNanos = System.nanoTime();
 
-        // ── SUBMIT 20 CONCURRENT TASKS ──────────────────────────────────
+        // â”€â”€ SUBMIT 20 CONCURRENT TASKS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         for (int i = 0; i < TOTAL_REQUESTS; i++) {
             long studentId = 1001L + i; // Students 1001 through 1020
 
@@ -126,7 +125,7 @@ public class RoomBookingLoadTest {
             futures.add(executor.submit(bookingTask));
         }
 
-        // ── COLLECT RESULTS ─────────────────────────────────────────────
+        // â”€â”€ COLLECT RESULTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         int successCount = 0;
         int rejectedCount = 0;
 
@@ -147,12 +146,12 @@ public class RoomBookingLoadTest {
             }
         }
 
-        // ── COMPUTE METRICS ─────────────────────────────────────────────
+        // â”€â”€ COMPUTE METRICS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         long elapsedNanos = System.nanoTime() - startNanos;
         double elapsedMs = elapsedNanos / 1_000_000.0;
         double throughput = (TOTAL_REQUESTS / elapsedMs) * 1000.0; // requests/sec
 
-        // ── PRINT SUMMARY ───────────────────────────────────────────────
+        // â”€â”€ PRINT SUMMARY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         System.out.println();
         System.out.println("---------------------------------------------------------------------");
         System.out.println("  LOAD TEST SUMMARY");
@@ -164,7 +163,7 @@ public class RoomBookingLoadTest {
         System.out.println(String.format("  Throughput      : %.2f requests/sec", throughput));
         System.out.println();
 
-        // ── PASS/FAIL VERDICT ───────────────────────────────────────────
+        // â”€â”€ PASS/FAIL VERDICT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (successCount == 1 && rejectedCount == TOTAL_REQUESTS - 1) {
             System.out.println("  RESULT: PASS");
             System.out.println("    -> Only 1 booking accepted out of " + TOTAL_REQUESTS + " concurrent requests.");

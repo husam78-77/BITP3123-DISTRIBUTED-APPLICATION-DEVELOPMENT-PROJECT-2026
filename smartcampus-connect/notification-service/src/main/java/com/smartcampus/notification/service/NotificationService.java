@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add Notification service logic - Ahmed B032320114"
-package com.smartcampus.notification.service;
+﻿package com.smartcampus.notification.service;
 
 import com.smartcampus.notification.entity.Notification;
 import com.smartcampus.notification.repository.NotificationRepository;

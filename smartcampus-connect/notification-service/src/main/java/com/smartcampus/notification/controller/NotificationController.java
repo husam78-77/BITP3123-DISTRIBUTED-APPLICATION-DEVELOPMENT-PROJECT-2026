@@ -1,5 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add Notification REST controller - Ahmed B032320114"
+
 package com.smartcampus.notification.controller;
 
 import com.smartcampus.notification.entity.Notification;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/notifications")
 public class NotificationController {

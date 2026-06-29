@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add RabbitMQ event listener - Ahmed B032320114"
-package com.smartcampus.notification.listener;
+﻿package com.smartcampus.notification.listener;
 
 import com.smartcampus.notification.config.RabbitMQConfig;
 import com.smartcampus.notification.service.NotificationService;

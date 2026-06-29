@@ -1,5 +1,3 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add RabbitMQ configuration - Ahmed B032320114"
 package com.smartcampus.notification.config;
 
 import com.github.fridujo.rabbitmq.mock.MockConnectionFactory;
@@ -15,13 +13,13 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     // Queue names
-    public static final String ENROLMENT_QUEUE    = "enrolment.queue";
-    public static final String LIBRARY_QUEUE      = "library.queue";
+    public static final String ENROLMENT_QUEUE = "enrolment.queue";
+    public static final String LIBRARY_QUEUE = "library.queue";
     public static final String NOTIFICATION_EXCHANGE = "smartcampus.exchange";
 
     // Routing keys
     public static final String ENROLMENT_ROUTING_KEY = "enrolment.event";
-    public static final String LIBRARY_ROUTING_KEY   = "library.event";
+    public static final String LIBRARY_ROUTING_KEY = "library.event";
 
     // --- In-memory mock connection (no Docker needed) ---
     @Bean

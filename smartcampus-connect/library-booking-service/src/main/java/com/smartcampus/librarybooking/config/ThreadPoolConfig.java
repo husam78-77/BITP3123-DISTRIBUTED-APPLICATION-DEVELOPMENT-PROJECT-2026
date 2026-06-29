@@ -1,5 +1,4 @@
-// R5 - Multithreaded Server: Thread Pool Configuration
-// git commit -m "Add ExecutorService thread pool config for R5 - Husam B032320128"
+﻿// R5 - Multithreaded Server: Thread Pool Configuration
 package com.smartcampus.librarybooking.config;
 
 import jakarta.annotation.PreDestroy;
@@ -11,9 +10,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R5 — THREAD POOL REQUIREMENT (Multithreaded Server)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R5 â€” THREAD POOL REQUIREMENT (Multithreaded Server)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
  * This configuration class satisfies the <b>Thread Pool</b> requirement of R5
  * by creating a managed {@link ExecutorService} bean backed by a fixed pool
@@ -25,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  *       across all consumers (LibraryService, load tests, etc.).</li>
  *   <li>Spring's IoC container owns the lifecycle, so the pool is created at
  *       application startup and <b>gracefully shut down</b> via
- *       {@link PreDestroy} when the context closes — preventing thread leaks.</li>
+ *       {@link PreDestroy} when the context closes â€” preventing thread leaks.</li>
  * </ul>
  *
  * <h3>Why {@code newFixedThreadPool(10)}?</h3>
@@ -38,19 +37,19 @@ import java.util.concurrent.TimeUnit;
  *
  * <h3>Lifecycle Management</h3>
  * <ol>
- *   <li>{@code shutdown()} — stops accepting new tasks and lets running tasks
+ *   <li>{@code shutdown()} â€” stops accepting new tasks and lets running tasks
  *       finish normally.</li>
- *   <li>{@code awaitTermination(30s)} — blocks up to 30 seconds for running
+ *   <li>{@code awaitTermination(30s)} â€” blocks up to 30 seconds for running
  *       tasks to complete.</li>
- *   <li>{@code shutdownNow()} — if tasks still haven't finished, forcibly
+ *   <li>{@code shutdownNow()} â€” if tasks still haven't finished, forcibly
  *       interrupts them and drains the queue to prevent thread leaks.</li>
  * </ol>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Configuration
 public class ThreadPoolConfig {
 
-    /** The managed thread pool instance — stored for graceful shutdown. */
+    /** The managed thread pool instance â€” stored for graceful shutdown. */
     private ExecutorService executorService;
 
     /**
@@ -69,18 +68,18 @@ public class ThreadPoolConfig {
     }
 
     /**
-     * R5 — GRACEFUL SHUTDOWN (Thread-Leak Prevention).
+     * R5 â€” GRACEFUL SHUTDOWN (Thread-Leak Prevention).
      *
      * <p>Called automatically by Spring when the application context is
      * destroyed (e.g. server shutdown, redeploy).  Without this method the
      * 10 pool threads would keep running as daemon-less threads, preventing
-     * the JVM from exiting cleanly — a <b>thread leak</b>.</p>
+     * the JVM from exiting cleanly â€” a <b>thread leak</b>.</p>
      *
      * <p>Shutdown sequence:</p>
      * <ol>
-     *   <li>{@code shutdown()} — reject new tasks, let in-flight tasks finish.</li>
-     *   <li>{@code awaitTermination(30, SECONDS)} — wait up to 30 s.</li>
-     *   <li>{@code shutdownNow()} — if tasks are still running, interrupt them.</li>
+     *   <li>{@code shutdown()} â€” reject new tasks, let in-flight tasks finish.</li>
+     *   <li>{@code awaitTermination(30, SECONDS)} â€” wait up to 30 s.</li>
+     *   <li>{@code shutdownNow()} â€” if tasks are still running, interrupt them.</li>
      * </ol>
      */
     @PreDestroy

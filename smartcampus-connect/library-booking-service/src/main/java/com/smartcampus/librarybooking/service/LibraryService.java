@@ -1,6 +1,4 @@
-// First Commit - Husam Abdulatef Ahmed Yousef Harpah - B032320128
-// git commit -m "Add Library service logic - Husam B032320128"
-package com.smartcampus.librarybooking.service;
+﻿package com.smartcampus.librarybooking.service;
 
 import com.smartcampus.librarybooking.entity.Book;
 import com.smartcampus.librarybooking.entity.BookLoan;
@@ -21,9 +19,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R5 — MULTITHREADED SERVER: FULL IMPLEMENTATION
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R5 â€” MULTITHREADED SERVER: FULL IMPLEMENTATION
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
  * This service class implements all four pillars of Requirement R5:
  *
@@ -42,10 +40,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * <h3>2. SHARED MUTABLE STATE</h3>
  * <p>The shared mutable state consists of two interrelated resources:</p>
  * <ul>
- *   <li><b>room_bookings table</b> — the persistent store of all bookings.
+ *   <li><b>room_bookings table</b> â€” the persistent store of all bookings.
  *       Multiple threads may read and write rows for the same room
  *       simultaneously.</li>
- *   <li><b>Room availability schedule</b> — the logical view derived from
+ *   <li><b>Room availability schedule</b> â€” the logical view derived from
  *       the table: "which time slots are free for a given room?"  This
  *       schedule changes every time a booking is inserted or cancelled.</li>
  * </ul>
@@ -56,7 +54,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <ul>
  *   <li>A <b>per-room fair {@code ReentrantLock}</b> guards the critical
  *       section in {@link #bookRoom}.</li>
- *   <li>The lock makes the "check-for-overlap → insert-booking" sequence
+ *   <li>The lock makes the "check-for-overlap â†’ insert-booking" sequence
  *       atomic for each room, eliminating the classic check-then-act
  *       race condition.</li>
  *   <li>Per-room granularity means booking Room A never blocks Room B,
@@ -68,7 +66,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *   <li>A dedicated test utility submits 20 concurrent booking requests
  *       for the same room and verifies that exactly one succeeds.</li>
  * </ul>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Service
 public class LibraryService {
@@ -78,7 +76,7 @@ public class LibraryService {
     private final RoomBookingRepository roomBookingRepository;
 
     /**
-     * R5 — THREAD POOL.
+     * R5 â€” THREAD POOL.
      *
      * <p>The {@link ExecutorService} bean (fixed pool of 10 threads)
      * is injected here via constructor injection.  It is used by
@@ -87,7 +85,7 @@ public class LibraryService {
     private final ExecutorService executorService;
 
     /**
-     * R6 — TCP Socket Producer Client.
+     * R6 â€” TCP Socket Producer Client.
      * Injected via constructor injection.  Used to send asynchronous
      * notification messages over TCP after library events (borrow book,
      * book room).
@@ -95,22 +93,22 @@ public class LibraryService {
     private final NotificationProducerClient notificationProducer;
 
     /**
-     * R5 — PER-ROOM LOCK MAP (Concurrency Control).
+     * R5 â€” PER-ROOM LOCK MAP (Concurrency Control).
      *
      * <h3>Why per-room locking instead of a single global lock?</h3>
-     * <p>A single global lock serialises <b>all</b> room bookings — if
+     * <p>A single global lock serialises <b>all</b> room bookings â€” if
      * Student A is booking Room-101, Student B must wait even though they
      * are booking Room-202.  This creates an unnecessary bottleneck.</p>
      *
      * <p>With a {@code ConcurrentHashMap<String, ReentrantLock>}, each
      * room gets its <b>own</b> lock.  Concurrent bookings for
      * <b>different rooms proceed in parallel</b>, while bookings for
-     * the <b>same room are serialised</b> — which is exactly the
+     * the <b>same room are serialised</b> â€” which is exactly the
      * protection we need.</p>
      *
      * <h3>Why {@code ConcurrentHashMap}?</h3>
      * <ul>
-     *   <li>Thread-safe map — multiple threads can call
+     *   <li>Thread-safe map â€” multiple threads can call
      *       {@code computeIfAbsent} simultaneously without corrupting
      *       the internal data structure.</li>
      *   <li>{@code computeIfAbsent} atomically creates a lock for a
@@ -118,10 +116,10 @@ public class LibraryService {
      *       synchronisation on the map itself.</li>
      * </ul>
      *
-     * <h3>Why fair locks — {@code new ReentrantLock(true)}?</h3>
+     * <h3>Why fair locks â€” {@code new ReentrantLock(true)}?</h3>
      * <p>A <b>fair</b> lock grants access in FIFO order.  In a
      * high-contention booking scenario (e.g. popular study rooms during
-     * exam season), fairness prevents <b>thread starvation</b> — every
+     * exam season), fairness prevents <b>thread starvation</b> â€” every
      * student's request is guaranteed to eventually be processed, rather
      * than being repeatedly overtaken by later arrivals.</p>
      *
@@ -146,7 +144,7 @@ public class LibraryService {
         this.notificationProducer = notificationProducer;
     }
 
-    // ── Book CRUD ──────────────────────────────────────────
+    // â”€â”€ Book CRUD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
@@ -175,7 +173,7 @@ public class LibraryService {
         bookRepository.deleteById(id);
     }
 
-    // ── Book Loans ─────────────────────────────────────────
+    // â”€â”€ Book Loans â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public BookLoan borrowBook(Long studentId, Long bookId) {
         Book book = getBookById(bookId);
@@ -196,9 +194,9 @@ public class LibraryService {
         );
         BookLoan saved = bookLoanRepository.save(loan);
 
-        // ── R6: ASYNCHRONOUS TCP NOTIFICATION (Producer → Consumer) ──────
+        // â”€â”€ R6: ASYNCHRONOUS TCP NOTIFICATION (Producer â†’ Consumer) â”€â”€â”€â”€â”€â”€
         // Send notification to the Notification Service via TCP socket.
-        // This is NON-BLOCKING — returns immediately while the TCP send
+        // This is NON-BLOCKING â€” returns immediately while the TCP send
         // happens on a background thread (CompletableFuture).
         notificationProducer.sendAsync(
                 "LIBRARY",
@@ -225,6 +223,11 @@ public class LibraryService {
         book.setAvailable(true);
         bookRepository.save(book);
 
+        notificationProducer.sendAsync(
+                "LIBRARY",
+                "Student " + loan.getStudentId() + " returned book " + book.getTitle()
+        );
+
         return loan;
     }
 
@@ -236,12 +239,12 @@ public class LibraryService {
         return bookLoanRepository.findAll();
     }
 
-    // ═══════════════════════════════════════════════════════════════════
-    // R5 — ROOM BOOKINGS (Multithreaded Implementation)
-    // ═══════════════════════════════════════════════════════════════════
+    // â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+    // R5 â€” ROOM BOOKINGS (Multithreaded Implementation)
+    // â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
 
     /**
-     * R5 — THREAD POOL USAGE: Asynchronous Booking Submission.
+     * R5 â€” THREAD POOL USAGE: Asynchronous Booking Submission.
      *
      * <p>Wraps the booking logic in a {@link Callable} and submits it to
      * the {@link ExecutorService} thread pool.  The caller receives a
@@ -249,7 +252,7 @@ public class LibraryService {
      * exception) once the pooled thread completes the task.</p>
      *
      * <p>This demonstrates the <b>Thread Pool</b> requirement: booking
-     * requests are not processed on the calling thread — they are
+     * requests are not processed on the calling thread â€” they are
      * dispatched to one of the 10 pooled worker threads for concurrent
      * execution.</p>
      *
@@ -270,7 +273,7 @@ public class LibraryService {
     }
 
     /**
-     * R5 — CONCURRENCY PROTECTION, SHARED MUTABLE STATE, and INPUT VALIDATION.
+     * R5 â€” CONCURRENCY PROTECTION, SHARED MUTABLE STATE, and INPUT VALIDATION.
      *
      * <p>Books a study room for a student with full concurrency control
      * using per-room fair {@link ReentrantLock} instances.</p>
@@ -288,17 +291,17 @@ public class LibraryService {
      *
      * <h3>RACE CONDITION WITHOUT LOCKING</h3>
      * <pre>
-     * Thread A: read bookings for Room-101  → no conflicts found
-     * Thread B: read bookings for Room-101  → no conflicts found  (stale!)
-     * Thread A: INSERT booking for Room-101 → SUCCESS
-     * Thread B: INSERT booking for Room-101 → SUCCESS  ← DOUBLE-BOOKING!
+     * Thread A: read bookings for Room-101  â†’ no conflicts found
+     * Thread B: read bookings for Room-101  â†’ no conflicts found  (stale!)
+     * Thread A: INSERT booking for Room-101 â†’ SUCCESS
+     * Thread B: INSERT booking for Room-101 â†’ SUCCESS  â†گ DOUBLE-BOOKING!
      * </pre>
      *
      * <h3>RACE CONDITION ELIMINATED WITH PER-ROOM LOCK</h3>
      * <pre>
-     * Thread A: acquire lock(Room-101) → read → no conflict → INSERT → release
-     * Thread B: acquire lock(Room-101) → read → CONFLICT FOUND → reject → release
-     * Thread C: acquire lock(Room-202) → executes in PARALLEL (different lock)
+     * Thread A: acquire lock(Room-101) â†’ read â†’ no conflict â†’ INSERT â†’ release
+     * Thread B: acquire lock(Room-101) â†’ read â†’ CONFLICT FOUND â†’ reject â†’ release
+     * Thread C: acquire lock(Room-202) â†’ executes in PARALLEL (different lock)
      * </pre>
      *
      * <h3>CRITICAL SECTION FLOW</h3>
@@ -307,8 +310,8 @@ public class LibraryService {
      *   <li>Obtain the per-room lock (creates one atomically if first access)</li>
      *   <li>Acquire the lock (blocks if another thread holds it for the same room)</li>
      *   <li>Query the database for overlapping CONFIRMED bookings</li>
-     *   <li>If overlap found → throw {@link RuntimeException} (booking rejected)</li>
-     *   <li>If no overlap → create and save the new booking</li>
+     *   <li>If overlap found â†’ throw {@link RuntimeException} (booking rejected)</li>
+     *   <li>If no overlap â†’ create and save the new booking</li>
      *   <li>Release the lock in a {@code finally} block (guarantees release)</li>
      * </ol>
      *
@@ -323,17 +326,17 @@ public class LibraryService {
     public RoomBooking bookRoom(Long studentId, String roomId,
                                 LocalDateTime startTime, LocalDateTime endTime) {
 
-        // ── R5: INPUT VALIDATION ────────────────────────────────────────
+        // â”€â”€ R5: INPUT VALIDATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // Reject invalid requests before acquiring any lock to avoid holding
         // a lock while processing clearly invalid data.
         validateBookingRequest(studentId, roomId, startTime, endTime);
 
-        // ── R5: PER-ROOM LOCK ACQUISITION ───────────────────────────────
+        // â”€â”€ R5: PER-ROOM LOCK ACQUISITION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // ConcurrentHashMap.computeIfAbsent atomically creates a fair
         // ReentrantLock for this room on first access. Subsequent calls
         // for the same room return the existing lock instance.
         //
-        // Fair lock: new ReentrantLock(true) — grants access in FIFO order.
+        // Fair lock: new ReentrantLock(true) â€” grants access in FIFO order.
         // In high-contention scenarios (e.g., popular rooms during exam season),
         // fairness prevents THREAD STARVATION where a student's request is
         // repeatedly overtaken by later arrivals.
@@ -341,7 +344,7 @@ public class LibraryService {
 
         lock.lock();
         try {
-            // ── R5: CRITICAL SECTION START ──────────────────────────────
+            // â”€â”€ R5: CRITICAL SECTION START â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             // Everything inside this try block is the critical section.
             // The per-room lock guarantees that no other thread can execute
             // this code for the SAME room simultaneously, protecting the
@@ -349,7 +352,7 @@ public class LibraryService {
             // schedule) from concurrent modification.
             //
             // Bookings for DIFFERENT rooms use DIFFERENT locks and therefore
-            // proceed in PARALLEL — this is the key scalability advantage
+            // proceed in PARALLEL â€” this is the key scalability advantage
             // of per-room locking over a single global lock.
 
             // Step 1: Query the database for overlapping CONFIRMED bookings.
@@ -368,11 +371,11 @@ public class LibraryService {
                 );
             }
 
-            // Step 3: No conflict — create and persist the new booking.
+            // Step 3: No conflict â€” create and persist the new booking.
             RoomBooking booking = new RoomBooking(studentId, roomId, startTime, endTime, "CONFIRMED");
             RoomBooking saved = roomBookingRepository.save(booking);
 
-            // ── R6: ASYNCHRONOUS TCP NOTIFICATION (Producer → Consumer) ──
+            // â”€â”€ R6: ASYNCHRONOUS TCP NOTIFICATION (Producer â†’ Consumer) â”€â”€
             // Send notification after booking is confirmed, but still inside
             // the critical section so we know the booking succeeded.
             // The sendAsync call itself is non-blocking.
@@ -382,10 +385,10 @@ public class LibraryService {
             );
 
             return saved;
-            // ── R5: CRITICAL SECTION END ────────────────────────────────
+            // â”€â”€ R5: CRITICAL SECTION END â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         } finally {
-            // ── R5: LOCK RELEASE (always in finally) ────────────────────
+            // â”€â”€ R5: LOCK RELEASE (always in finally) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             // The finally block guarantees the lock is always released, even
             // if an exception is thrown (e.g., overlap detected, DB error).
             // Failing to release the lock would cause a DEADLOCK where no
@@ -426,7 +429,7 @@ public class LibraryService {
         }
         if (endTime.isEqual(startTime)) {
             throw new IllegalArgumentException(
-                    "End time must be after start time — zero-duration bookings are not allowed");
+                    "End time must be after start time â€” zero-duration bookings are not allowed");
         }
     }
 
@@ -439,7 +442,14 @@ public class LibraryService {
         }
 
         booking.setStatus("CANCELLED");
-        return roomBookingRepository.save(booking);
+        RoomBooking saved = roomBookingRepository.save(booking);
+
+        notificationProducer.sendAsync(
+                "LIBRARY",
+                "Student " + booking.getStudentId() + " cancelled Room " + booking.getRoomId() + " booking"
+        );
+
+        return saved;
     }
 
     public List<RoomBooking> getRoomBookingsByStudent(Long studentId) {

@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add Notification repository - Ahmed B032320114"
-package com.smartcampus.notification.repository;
+﻿package com.smartcampus.notification.repository;
 
 import com.smartcampus.notification.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,5 +1,4 @@
-// First Commit - Abdalla Hashim Ahmed Abdalla - B032320119
-// git commit -m "Add Course REST controller - Abdalla B032320119"
+
 package com.smartcampus.courseenrolment.controller;
 
 import com.smartcampus.courseenrolment.entity.Course;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {

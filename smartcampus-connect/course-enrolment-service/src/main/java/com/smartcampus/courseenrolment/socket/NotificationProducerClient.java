@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add NotificationProducerClient TCP producer for Course Enrolment - Ahmed B032320114"
-package com.smartcampus.courseenrolment.socket;
+﻿package com.smartcampus.courseenrolment.socket;
 
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
@@ -12,19 +10,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R6 — DISTRIBUTED MESSAGING: TCP Socket Producer (Course Enrolment)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R6 â€” DISTRIBUTED MESSAGING: TCP Socket Producer (Course Enrolment)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
- * This class implements the <b>Producer</b> side of the Producer–Consumer
+ * This class implements the <b>Producer</b> side of the Producerâ€“Consumer
  * architecture for the Course Enrolment Service.
  *
  * <h3>Architecture Role</h3>
  * <pre>
- *   ┌───────────────────────┐          TCP (port 9999)          ┌─────────────────────────┐
- *   │  Course Enrolment     │ ──────────────────────────────────>│   Notification Service  │
- *   │  Service (PRODUCER)   │         ENROLMENT messages        │   (CONSUMER)            │
- *   └───────────────────────┘                                   └─────────────────────────┘
+ *   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ          TCP (port 9999)          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ
+ *   â”‚  Course Enrolment     â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚   Notification Service  â”‚
+ *   â”‚  Service (PRODUCER)   â”‚         ENROLMENT messages        â”‚   (CONSUMER)            â”‚
+ *   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک                                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک
  * </pre>
  *
  * <h3>How It Works</h3>
@@ -46,14 +44,14 @@ import java.util.concurrent.CompletableFuture;
  * <p>The {@link #sendAsync(String, String)} method uses
  * {@link CompletableFuture#runAsync(Runnable)} to dispatch the TCP send
  * operation to a background thread.  This ensures that the enrolment
- * response is returned to the client immediately — the notification
+ * response is returned to the client immediately â€” the notification
  * is delivered in the background without blocking the HTTP response.</p>
  *
  * <h3>Message Format</h3>
  * <pre>
  *   ENROLMENT:2026-06-10T10:30:00 Student 1 enrolled in DAD3123
  * </pre>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Component
 public class NotificationProducerClient {
@@ -89,10 +87,10 @@ public class NotificationProducerClient {
     }
 
     /**
-     * R6 — ASYNCHRONOUS MESSAGE SEND.
+     * R6 â€” ASYNCHRONOUS MESSAGE SEND.
      *
      * <p>Sends a notification message to the consumer asynchronously.
-     * The calling method returns immediately — message delivery happens
+     * The calling method returns immediately â€” message delivery happens
      * on a background thread via {@link CompletableFuture}.</p>
      *
      * <p>This is the core of the asynchronous workflow: the enrolment
@@ -138,7 +136,7 @@ public class NotificationProducerClient {
     }
 
     /**
-     * R6 — Graceful shutdown: closes the TCP connection when the
+     * R6 â€” Graceful shutdown: closes the TCP connection when the
      * Spring application context is destroyed.
      */
     @PreDestroy

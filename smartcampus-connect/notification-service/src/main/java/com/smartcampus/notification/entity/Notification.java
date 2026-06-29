@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add Notification entity - Ahmed B032320114"
-package com.smartcampus.notification.entity;
+﻿package com.smartcampus.notification.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

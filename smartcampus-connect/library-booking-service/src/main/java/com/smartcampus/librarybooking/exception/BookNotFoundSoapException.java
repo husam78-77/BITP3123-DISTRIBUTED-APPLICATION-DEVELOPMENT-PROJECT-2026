@@ -1,14 +1,12 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add SOAP fault handling - Ahmed B032320114"
-package com.smartcampus.librarybooking.exception;
+﻿package com.smartcampus.librarybooking.exception;
 
 import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R8 — SOAP FAULT: Custom Exception for Book Not Found
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R8 â€” SOAP FAULT: Custom Exception for Book Not Found
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
  * This exception is thrown by {@code LibraryEndpoint.getBookAvailability()}
  * when a SOAP client requests a book ID that does not exist in the database.
@@ -19,7 +17,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
  * SOAP services always return HTTP 200 (even for errors) and embed error
  * information inside a {@code <soap:Fault>} element within the SOAP
  * envelope body.  This is because SOAP treats the HTTP layer purely as a
- * transport — application-level success/failure is communicated within
+ * transport â€” application-level success/failure is communicated within
  * the XML message itself.</p>
  *
  * <h3>SOAP Fault Structure</h3>
@@ -38,15 +36,15 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
  *
  * <h3>SOAP Fault Codes</h3>
  * <ul>
- *   <li><b>soap:Client</b> — the error is caused by the client sending
+ *   <li><b>soap:Client</b> â€” the error is caused by the client sending
  *       invalid data (e.g., a non-existent book ID).  The client should
  *       fix the request before retrying.</li>
- *   <li><b>soap:Server</b> — the error is caused by a server-side failure
+ *   <li><b>soap:Server</b> â€” the error is caused by a server-side failure
  *       (e.g., database outage).  The client may retry later.</li>
  * </ul>
  *
  * <p>This exception uses {@code FaultCode.CLIENT} because the error is
- * caused by the client requesting a book ID that does not exist — it is
+ * caused by the client requesting a book ID that does not exist â€” it is
  * a client-side input problem, not a server malfunction.</p>
  *
  * <h3>Why SOAP Faults differ from REST errors</h3>
@@ -76,7 +74,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
  * {@code getBookAvailabilityRequest} with a bookId that does not exist,
  * this exception is thrown and Spring WS converts it into a standard
  * SOAP Fault response.</p>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @SoapFault(faultCode = FaultCode.CLIENT, faultStringOrReason = "Requested book was not found")
 public class BookNotFoundSoapException extends RuntimeException {

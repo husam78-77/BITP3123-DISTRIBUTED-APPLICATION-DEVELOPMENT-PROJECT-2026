@@ -1,6 +1,4 @@
-// First Commit - Abdalla Hashim Ahmed Abdalla - B032320119
-// git commit -m "Add Enrolment service logic - Abdalla B032320119"
-package com.smartcampus.courseenrolment.service;
+﻿package com.smartcampus.courseenrolment.service;
 
 import com.smartcampus.courseenrolment.entity.Course;
 import com.smartcampus.courseenrolment.entity.Enrolment;
@@ -14,11 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.List;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R6 — DISTRIBUTED MESSAGING: Producer (Course Enrolment Service)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R6 â€” DISTRIBUTED MESSAGING: Producer (Course Enrolment Service)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
- * This service acts as a <b>Producer</b> in the Producer–Consumer
+ * This service acts as a <b>Producer</b> in the Producerâ€“Consumer
  * architecture.  After a student enrolment is successfully persisted,
  * an asynchronous TCP notification is sent to the Notification Service
  * (Consumer) via the {@link NotificationProducerClient}.
@@ -32,7 +30,7 @@ import java.util.List;
  *   5. The HTTP response is returned IMMEDIATELY (non-blocking)
  *   6. Meanwhile, NotificationSocketServer receives and persists the notification
  * </pre>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Service
 public class EnrolmentService {
@@ -43,7 +41,7 @@ public class EnrolmentService {
     private final String studentServiceUrl;
 
     /**
-     * R6 — TCP Socket Producer Client.
+     * R6 â€” TCP Socket Producer Client.
      * Injected via constructor injection.  Used to send asynchronous
      * notification messages over TCP after enrolment events.
      */
@@ -77,13 +75,13 @@ public class EnrolmentService {
      * Enrols a student in a course and sends an asynchronous TCP
      * notification to the Notification Service.
      *
-     * <p><b>R6 — Producer action:</b> After the enrolment is saved,
+     * <p><b>R6 â€” Producer action:</b> After the enrolment is saved,
      * {@code notificationProducer.sendAsync()} sends a TCP message
      * using the custom protocol format:</p>
      * <pre>
      *   ENROLMENT:2026-06-10T10:30:00 Student 1 enrolled in DAD3123
      * </pre>
-     * <p>The send is asynchronous (CompletableFuture) — the HTTP
+     * <p>The send is asynchronous (CompletableFuture) â€” the HTTP
      * response is not delayed.</p>
      */
     public Enrolment enrolStudent(Long studentId, Long courseId, String semester) {
@@ -108,9 +106,9 @@ public class EnrolmentService {
         Enrolment enrolment = new Enrolment(studentId, courseId, semester, "ENROLLED");
         Enrolment saved = enrolmentRepository.save(enrolment);
 
-        // ── R6: ASYNCHRONOUS TCP NOTIFICATION (Producer → Consumer) ──────
+        // â”€â”€ R6: ASYNCHRONOUS TCP NOTIFICATION (Producer â†’ Consumer) â”€â”€â”€â”€â”€â”€
         // Send the notification message to the Notification Service via TCP.
-        // This call is NON-BLOCKING — it returns immediately while the
+        // This call is NON-BLOCKING â€” it returns immediately while the
         // actual TCP send happens on a background thread.
         notificationProducer.sendAsync(
                 "ENROLMENT",
@@ -138,7 +136,14 @@ public class EnrolmentService {
         course.setCurrentEnrolled(Math.max(0, course.getCurrentEnrolled() - 1));
         courseRepository.save(course);
 
-        return enrolmentRepository.save(enrolment);
+        Enrolment saved = enrolmentRepository.save(enrolment);
+
+        notificationProducer.sendAsync(
+                "ENROLMENT",
+                "Student " + studentId + " dropped " + course.getCourseCode()
+        );
+
+        return saved;
     }
 
     // Get all enrolments

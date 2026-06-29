@@ -1,6 +1,4 @@
-// First Commit - Abdalla Hashim Ahmed Abdalla - B032320119
-// git commit -m "Add RoomBooking repository - Abdalla B032320119"
-package com.smartcampus.librarybooking.repository;
+﻿package com.smartcampus.librarybooking.repository;
 
 import com.smartcampus.librarybooking.entity.RoomBooking;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +12,7 @@ import java.util.List;
  * Spring Data JPA repository for {@link RoomBooking} entities.
  *
  * <p>The custom query {@link #findOverlappingBookings} is central to the
- * R5 concurrency-control design — it is called <b>inside</b> the
+ * R5 concurrency-control design â€” it is called <b>inside</b> the
  * per-room {@code ReentrantLock} critical section in
  * {@code LibraryService.bookRoom()} to detect scheduling conflicts.</p>
  */
@@ -24,7 +22,7 @@ public interface RoomBookingRepository extends JpaRepository<RoomBooking, Long> 
     List<RoomBooking> findByStatus(String status);
 
     /**
-     * R5 — OVERLAP DETECTION QUERY (Shared Mutable State Read).
+     * R5 â€” OVERLAP DETECTION QUERY (Shared Mutable State Read).
      *
      * <p>Finds every <b>CONFIRMED</b> booking for a given room whose time
      * range overlaps with the requested interval.</p>
@@ -51,35 +49,35 @@ public interface RoomBookingRepository extends JpaRepository<RoomBooking, Long> 
      *
      * <h3>Overlap Scenarios Covered</h3>
      * <pre>
-     * Case 1 — Partial overlap (front):
-     *   Existing:  |────────|
-     *   Requested:      |────────|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✓  → OVERLAP
+     * Case 1 â€” Partial overlap (front):
+     *   Existing:  |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   Requested:      |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ“  â†’ OVERLAP
      *
-     * Case 2 — Partial overlap (back):
-     *   Existing:       |────────|
-     *   Requested: |────────|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✓  → OVERLAP
+     * Case 2 â€” Partial overlap (back):
+     *   Existing:       |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   Requested: |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ“  â†’ OVERLAP
      *
-     * Case 3 — Complete containment (existing inside requested):
-     *   Existing:    |──|
-     *   Requested: |────────|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✓  → OVERLAP
+     * Case 3 â€” Complete containment (existing inside requested):
+     *   Existing:    |â”€â”€|
+     *   Requested: |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ“  â†’ OVERLAP
      *
-     * Case 4 — Complete containment (requested inside existing):
-     *   Existing:  |────────|
-     *   Requested:   |──|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✓  → OVERLAP
+     * Case 4 â€” Complete containment (requested inside existing):
+     *   Existing:  |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   Requested:   |â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ“  â†’ OVERLAP
      *
-     * Case 5 — Exact match:
-     *   Existing:  |────────|
-     *   Requested: |────────|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✓  → OVERLAP
+     * Case 5 â€” Exact match:
+     *   Existing:  |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   Requested: |â”€â”€â”€â”€â”€â”€â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ“  â†’ OVERLAP
      *
-     * Case 6 — Adjacent (no overlap):
-     *   Existing:  |────|
-     *   Requested:       |────|
-     *   E_start &lt; R_end ✓   E_end &gt; R_start ✗  → NO OVERLAP ✓
+     * Case 6 â€” Adjacent (no overlap):
+     *   Existing:  |â”€â”€â”€â”€|
+     *   Requested:       |â”€â”€â”€â”€|
+     *   E_start &lt; R_end âœ“   E_end &gt; R_start âœ—  â†’ NO OVERLAP âœ“
      * </pre>
      *
      * @param roomId    the room identifier to check for conflicts

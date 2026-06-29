@@ -1,5 +1,3 @@
-// First Commit - Husam Abdulatef Ahmed Yousef Harpah - B032320128
-// git commit -m "Add RoomBooking REST controller - Husam B032320128"
 package com.smartcampus.librarybooking.controller;
 
 import com.smartcampus.librarybooking.entity.RoomBooking;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomBookingController {
@@ -36,17 +35,15 @@ public class RoomBookingController {
     // POST book a room
     @PostMapping("/book")
     public ResponseEntity<RoomBooking> bookRoom(@RequestParam Long studentId,
-                                                @RequestParam String roomId,
-                                                @RequestParam String startTime,
-                                                @RequestParam String endTime) {
+            @RequestParam String roomId,
+            @RequestParam String startTime,
+            @RequestParam String endTime) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 libraryService.bookRoom(
                         studentId,
                         roomId,
                         LocalDateTime.parse(startTime),
-                        LocalDateTime.parse(endTime)
-                )
-        );
+                        LocalDateTime.parse(endTime)));
     }
 
     // PUT cancel room booking

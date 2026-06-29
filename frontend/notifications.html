@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - SmartCampus Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>SmartCampus Connect</h1>
+        <nav class="main-nav">
+            <a href="index.html">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="courses.html">Courses</a>
+            <a href="library.html">Library</a>
+            <a href="notifications.html" class="active">Notifications</a>
+            <a href="reports.html">Reports</a>
+            <a href="soap.html">SOAP Demo</a>
+        </nav>
+    </header>
+    
+    <div id="toast-container"></div>
+    
+    <main class="container">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>System Notifications</h2>
+                <button onclick="loadNotifications()" id="refreshBtn">Refresh Notifications</button>
+            </div>
+            <p style="color: #666; margin-bottom: 1rem;">These notifications are generated via TCP Producer Clients in other microservices and consumed by the Notification Socket Server.</p>
+            
+            <div id="notifLoader" class="loader"></div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Timestamp</th>
+                            <th>Type</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notificationTableBody">
+                        <!-- Rows injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/common.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

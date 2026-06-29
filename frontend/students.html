@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - SmartCampus Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>SmartCampus Connect</h1>
+        <nav class="main-nav">
+            <a href="index.html">Dashboard</a>
+            <a href="students.html" class="active">Students</a>
+            <a href="courses.html">Courses</a>
+            <a href="library.html">Library</a>
+            <a href="notifications.html">Notifications</a>
+            <a href="reports.html">Reports</a>
+            <a href="soap.html">SOAP Demo</a>
+        </nav>
+    </header>
+    
+    <div id="toast-container"></div>
+    
+    <main class="container">
+        <div class="grid">
+            <div class="card">
+                <h2>Create Student</h2>
+                <form id="student-form">
+                    <input type="hidden" id="studentId">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Matric Number</label>
+                        <input type="text" id="matricNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Programme</label>
+                        <input type="text" id="programme" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Year of Study (1–4)</label>
+                        <input type="number" id="currentYear" min="1" max="4" required placeholder="e.g. 1, 2, 3 or 4">
+                    </div>
+                    <button type="submit" id="submitBtn">Save Student</button>
+                    <button type="button" id="cancelBtn" style="display:none; background:#6c757d;">Cancel Edit</button>
+                </form>
+            </div>
+            
+            <div class="card" style="grid-column: span 2;">
+                <h2>View Students</h2>
+                <button onclick="loadStudents()" style="margin-bottom: 10px;">Refresh List</button>
+                <div id="studentLoader" class="loader"></div>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Matric Number</th>
+                                <th>Programme</th>
+                                <th>Year</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                            <!-- Rows will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/common.js"></script>
+    <script src="js/students.js"></script>
+</body>
+</html>

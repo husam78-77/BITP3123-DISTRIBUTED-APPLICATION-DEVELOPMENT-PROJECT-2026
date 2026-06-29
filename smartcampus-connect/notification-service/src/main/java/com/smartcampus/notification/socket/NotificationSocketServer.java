@@ -1,6 +1,4 @@
-// First Commit - Ahmed Abdulrahman Ahmed Ali Gamel - B032320114
-// git commit -m "Add NotificationSocketServer TCP consumer - Ahmed B032320114"
-package com.smartcampus.notification.socket;
+﻿package com.smartcampus.notification.socket;
 
 import com.smartcampus.notification.service.NotificationService;
 import jakarta.annotation.PreDestroy;
@@ -17,24 +15,24 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R6 — DISTRIBUTED MESSAGING: TCP Socket Consumer (Notification Server)
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R6 â€” DISTRIBUTED MESSAGING: TCP Socket Consumer (Notification Server)
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
- * This class implements the <b>Consumer</b> side of the Producer–Consumer
+ * This class implements the <b>Consumer</b> side of the Producerâ€“Consumer
  * architecture using Java TCP sockets (per Lab 5).
  *
  * <h3>Architecture Role</h3>
  * <pre>
- *   ┌───────────────────────┐          TCP (port 9999)          ┌─────────────────────────┐
- *   │  Course Enrolment     │ ──────────────────────────────────>│                         │
- *   │  Service (PRODUCER)   │         ENROLMENT messages        │   Notification Service  │
- *   └───────────────────────┘                                   │   (CONSUMER)            │
- *                                                               │                         │
- *   ┌───────────────────────┐          TCP (port 9999)          │   NotificationSocket    │
- *   │  Library Booking      │ ──────────────────────────────────>│   Server                │
- *   │  Service (PRODUCER)   │         LIBRARY messages          │                         │
- *   └───────────────────────┘                                   └─────────────────────────┘
+ *   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ          TCP (port 9999)          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ
+ *   â”‚  Course Enrolment     â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚                         â”‚
+ *   â”‚  Service (PRODUCER)   â”‚         ENROLMENT messages        â”‚   Notification Service  â”‚
+ *   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک                                   â”‚   (CONSUMER)            â”‚
+ *                                                               â”‚                         â”‚
+ *   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”گ          TCP (port 9999)          â”‚   NotificationSocket    â”‚
+ *   â”‚  Library Booking      â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚   Server                â”‚
+ *   â”‚  Service (PRODUCER)   â”‚         LIBRARY messages          â”‚                         â”‚
+ *   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک                                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”ک
  * </pre>
  *
  * <h3>How It Works</h3>
@@ -59,19 +57,19 @@ import java.util.concurrent.TimeUnit;
  * connect simultaneously without spawning unbounded threads.</p>
  *
  * <h3>Message Framing</h3>
- * <p>Messages use <b>line-based framing</b> — each message is a single
+ * <p>Messages use <b>line-based framing</b> â€” each message is a single
  * line of UTF-8 text terminated by {@code \n}.  The reader uses
  * {@code BufferedReader.readLine()} which blocks until a full line
  * arrives, then returns the content without the newline.</p>
  *
  * <h3>Lifecycle</h3>
  * <ul>
- *   <li><b>Startup</b>: Triggered by {@code ApplicationReadyEvent} — the
+ *   <li><b>Startup</b>: Triggered by {@code ApplicationReadyEvent} â€” the
  *       server socket starts after Spring has fully initialized.</li>
  *   <li><b>Shutdown</b>: {@code @PreDestroy} closes the server socket
  *       and shuts down the thread pool gracefully.</li>
  * </ul>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Component
 public class NotificationSocketServer {
@@ -92,7 +90,7 @@ public class NotificationSocketServer {
     }
 
     /**
-     * R6 — Starts the TCP socket server after Spring Boot has fully started.
+     * R6 â€” Starts the TCP socket server after Spring Boot has fully started.
      *
      * <p>Uses {@link ApplicationReadyEvent} so the server does not start
      * until all beans are initialized and the HTTP server is ready.
@@ -128,7 +126,7 @@ public class NotificationSocketServer {
             }
         });
 
-        // Daemon thread — JVM can exit even if this thread is still running
+        // Daemon thread â€” JVM can exit even if this thread is still running
         serverThread.setDaemon(true);
         serverThread.setName("notification-socket-server");
         serverThread.start();
@@ -183,7 +181,7 @@ public class NotificationSocketServer {
     }
 
     /**
-     * R6 — Graceful shutdown of the TCP server and thread pool.
+     * R6 â€” Graceful shutdown of the TCP server and thread pool.
      *
      * <p>Called automatically by Spring when the application context
      * is destroyed.  Closes the server socket and shuts down the

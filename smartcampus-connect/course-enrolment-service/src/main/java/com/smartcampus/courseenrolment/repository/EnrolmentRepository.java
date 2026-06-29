@@ -1,6 +1,4 @@
-// First Commit - Abdalla Hashim Ahmed Abdalla - B032320119
-// git commit -m "Add Enrolment repository - Abdalla B032320119"
-package com.smartcampus.courseenrolment.repository;
+﻿package com.smartcampus.courseenrolment.repository;
 
 import com.smartcampus.courseenrolment.entity.Enrolment;
 import org.springframework.data.jpa.repository.JpaRepository;

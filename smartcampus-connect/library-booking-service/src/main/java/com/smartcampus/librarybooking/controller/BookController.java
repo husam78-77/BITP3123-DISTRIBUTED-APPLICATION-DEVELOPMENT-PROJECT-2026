@@ -1,5 +1,4 @@
-// First Commit - Husam Abdulatef Ahmed Yousef Harpah - B032320128
-// git commit -m "Add Book REST controller - Husam B032320128"
+
 package com.smartcampus.librarybooking.controller;
 
 import com.smartcampus.librarybooking.entity.Book;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -56,7 +56,7 @@ public class BookController {
     // POST borrow book
     @PostMapping("/borrow")
     public ResponseEntity<BookLoan> borrowBook(@RequestParam Long studentId,
-                                               @RequestParam Long bookId) {
+            @RequestParam Long bookId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryService.borrowBook(studentId, bookId));
     }
 

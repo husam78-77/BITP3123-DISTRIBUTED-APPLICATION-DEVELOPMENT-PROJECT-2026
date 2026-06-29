@@ -1,6 +1,4 @@
-// First Commit - Husam Abdulatef Ahmed Yousef Harpah - B032320128
-// git commit -m "Add SOAP Library endpoint with fault handling - Husam B032320128"
-package com.smartcampus.librarybooking.endpoint;
+﻿package com.smartcampus.librarybooking.endpoint;
 
 import com.smartcampus.library.GetBookAvailabilityRequest;
 import com.smartcampus.library.GetBookAvailabilityResponse;
@@ -13,16 +11,16 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════
- * R8 — SOAP ENDPOINT: Library Book Availability Service
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * R8 â€” SOAP ENDPOINT: Library Book Availability Service
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  *
  * This class implements the SOAP web service endpoint for checking
  * book availability in the SmartCampus Library system.
  *
  * <h3>SOAP Operations</h3>
  * <ul>
- *   <li><b>getBookAvailability</b> — accepts a {@code bookId} and returns
+ *   <li><b>getBookAvailability</b> â€” accepts a {@code bookId} and returns
  *       the book's title, author, and availability status.</li>
  * </ul>
  *
@@ -31,9 +29,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
  *
  * <h3>R8 Rubric Requirements Satisfied</h3>
  * <ol>
- *   <li><b>Successful SOAP call</b> — when {@code bookId} exists (e.g., 1),
+ *   <li><b>Successful SOAP call</b> â€” when {@code bookId} exists (e.g., 1),
  *       a valid {@code GetBookAvailabilityResponse} is returned.</li>
- *   <li><b>Deliberately-triggered SOAP Fault</b> — when {@code bookId}
+ *   <li><b>Deliberately-triggered SOAP Fault</b> â€” when {@code bookId}
  *       does not exist (e.g., 999), a {@link BookNotFoundSoapException}
  *       is thrown, which Spring WS converts into a standard
  *       {@code <soap:Fault>} response with {@code faultcode=soap:Client}
@@ -43,17 +41,17 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
  * <h3>Fault Handling Flow</h3>
  * <pre>
  *   Client sends: bookId=999
- *     → LibraryEndpoint.getBookAvailability()
- *       → LibraryService.getBookById(999) → throws RuntimeException
- *         → Caught in endpoint → throws BookNotFoundSoapException
- *           → Spring WS SoapFaultAnnotationExceptionResolver
- *             → Generates SOAP Fault response:
+ *     â†’ LibraryEndpoint.getBookAvailability()
+ *       â†’ LibraryService.getBookById(999) â†’ throws RuntimeException
+ *         â†’ Caught in endpoint â†’ throws BookNotFoundSoapException
+ *           â†’ Spring WS SoapFaultAnnotationExceptionResolver
+ *             â†’ Generates SOAP Fault response:
  *                &lt;soap:Fault&gt;
  *                  &lt;faultcode&gt;soap:Client&lt;/faultcode&gt;
  *                  &lt;faultstring&gt;Book with ID 999 was not found&lt;/faultstring&gt;
  *                &lt;/soap:Fault&gt;
  * </pre>
- * ═══════════════════════════════════════════════════════════════════════════
+ * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
  */
 @Endpoint
 public class LibraryEndpoint {
@@ -68,7 +66,7 @@ public class LibraryEndpoint {
     }
 
     /**
-     * R8 — SOAP Operation: Get Book Availability.
+     * R8 â€” SOAP Operation: Get Book Availability.
      *
      * <p>Checks whether a book is available for borrowing by its ID.</p>
      *
@@ -104,7 +102,7 @@ public class LibraryEndpoint {
     public GetBookAvailabilityResponse getBookAvailability(
             @RequestPayload GetBookAvailabilityRequest request) {
 
-        // ── R8: SOAP FAULT HANDLING ─────────────────────────────────────
+        // â”€â”€ R8: SOAP FAULT HANDLING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // Attempt to retrieve the book from the database.
         // If the book does NOT exist, LibraryService.getBookById() throws
         // a RuntimeException. We catch it and re-throw as our custom
@@ -122,7 +120,7 @@ public class LibraryEndpoint {
             throw new BookNotFoundSoapException(request.getBookId());
         }
 
-        // ── R8: SUCCESSFUL SOAP RESPONSE ────────────────────────────────
+        // â”€â”€ R8: SUCCESSFUL SOAP RESPONSE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // If the book exists, build and return the standard SOAP response.
         // This satisfies R8: "demonstrate a successful SOAP call"
         GetBookAvailabilityResponse response = new GetBookAvailabilityResponse();
